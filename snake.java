@@ -19,9 +19,13 @@ public class snake extends Actor
     public void act()
     {
        moveSnake();
+        if (isTouching(Apple.class)) {
+            removeTouching(Apple.class);
+            ((MyWorld)getWorld()).spawnApple();
     }
-
-    public void moveSnake()
+}
+       
+        public void moveSnake()
     {
         if (Greenfoot.isKeyDown("up"))
         {
