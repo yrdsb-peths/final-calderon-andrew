@@ -13,7 +13,7 @@ public class MyWorld extends World
         addObject(snake, getWidth()/2, getHeight()/2);
 
         
-        addObject(scoreLabel, 70, 20);
+       
 
         spawnApple();
     }
