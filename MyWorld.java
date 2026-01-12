@@ -7,11 +7,12 @@ public class MyWorld extends World
     public MyWorld()
     {    
         super(600, 400, 1);
+        
 
         snake snake = new snake();
         addObject(snake, getWidth()/2, getHeight()/2);
 
-        scoreLabel = new Label();
+        
         addObject(scoreLabel, 70, 20);
 
         spawnApple();
@@ -27,7 +28,7 @@ public class MyWorld extends World
 
     public void addScore(int amount)
     {
-        scoreLabelact(amount);
+        
     }
     
      public void gameOver()
