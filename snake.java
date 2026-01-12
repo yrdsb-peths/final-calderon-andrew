@@ -1,5 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
+import java.util.ArrayList;
 /**
  * Write a description of class snake here.
  * 
@@ -17,6 +17,7 @@ public class snake extends Actor
     private ArrayList<SnakeBody> body = new ArrayList<>();
     private int dx = 5;
     private int dy = 0;
+    private boolean bodyCreated = false;
     
     public snake() {
         GreenfootImage img = new GreenfootImage(20, 20);
@@ -28,6 +29,10 @@ public class snake extends Actor
 
     public void act()
     {
+         if (!bodyCreated) {
+            createBody();
+            bodyCreated = true;
+        }
        moveSnake();
         if (isTouching(Apple.class)) {
             removeTouching(Apple.class);
@@ -58,6 +63,13 @@ public class snake extends Actor
         {
             setRotation(0);
             move(2);
+        }
+    }
+        private void createBody() {
+        for (int i = 1; i <= 3; i++) {
+            SnakeBody segment = new SnakeBody();
+            body.add(segment);
+            getWorld().addObject(segment, getX() - (i * 20), getY());
         }
     }
 }
