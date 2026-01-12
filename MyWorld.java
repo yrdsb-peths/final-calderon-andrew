@@ -13,11 +13,6 @@ public class MyWorld extends World
         addObject(snake, getWidth()/2, getHeight()/2);
 
         
-<<<<<<< HEAD
-       
-=======
-        
->>>>>>> 0fb964fbda493df0e9629bb241e3eaf27c6778b5
 
         spawnApple();
     }
