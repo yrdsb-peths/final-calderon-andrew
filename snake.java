@@ -14,6 +14,16 @@ public class snake extends Actor
      */
     
     // test 
+    private ArrayList<SnakeBody> body = new ArrayList<>();
+    private int dx = 5;
+    private int dy = 0;
+    
+    public snake() {
+        GreenfootImage img = new GreenfootImage(20, 20);
+        img.setColor(Color.GREEN);
+        img.fillOval(0, 0, 20, 20);
+        setImage(img);
+    }
   
 
     public void act()
