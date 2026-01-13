@@ -39,7 +39,7 @@ public class snake extends Actor
             ((MyWorld)getWorld()).spawnApple();
     }
     
-}
+    }
        
 
         public void moveSnake()
@@ -73,6 +73,7 @@ public class snake extends Actor
         }
     }
 }
+
 
 
 
