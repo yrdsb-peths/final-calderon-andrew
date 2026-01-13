@@ -17,6 +17,7 @@ public class snake extends Actor
     // test 
     private String direction = "right";
     private int moveCounter = 0;
+    private int score = 0;  
     private ArrayList<SnakeBody> body = new ArrayList<>();
     private ArrayList <int[]> positions = new ArrayList<>();
     private boolean bodyCreated = false;
@@ -41,7 +42,7 @@ public class snake extends Actor
             removeTouching(Apple.class);
             ((MyWorld)getWorld()).spawnApple();
             growBody();
-            ((MyWorld)getWorld()).spawnApple();
+            
         }
         
         //Movement
@@ -101,21 +102,30 @@ public class snake extends Actor
             SnakeBody segment = new SnakeBody();
             body.add(segment);
             getWorld().addObject(segment, getX() - (i * 20), getY());
+            score++;
         }
     }
     
     private void growBody(){
+        for(int i = 0; i< 2 ; i++){
         SnakeBody segment = new SnakeBody();
-        body.add(segment);
+        
     
     
     // Place at the last body segment's position
-    if(!body.isEmpty()&& body.size() > 1){
-        SnakeBody tail = body.get(body.size() - 2);
-        getWorld().addObject(segment, tail.getX(), tail.getY());
-    }
+        if(body.size() > 1){
+            SnakeBody tail = body.get(body.size() - 1);
+            getWorld().addObject(segment, tail.getX(), tail.getY());
+        }
+    
+        else{
+            getWorld().addObject(segment,getX(), getY());
+        }
+            body.add(segment);
+        }
     }
 }
+
 
 
 
