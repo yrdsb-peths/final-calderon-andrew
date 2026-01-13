@@ -14,10 +14,7 @@ public class snake extends Actor
      */
     
     // test 
-    private ArrayList<SnakeBody> body = new ArrayList<>();
-    private int dx = 5;
-    private int dy = 0;
-    private boolean bodyCreated = false;
+    
     
     public snake() {
         GreenfootImage img = new GreenfootImage(20, 20);
@@ -29,49 +26,24 @@ public class snake extends Actor
 
     public void act()
     {
-         if (!bodyCreated) {
-            createBody();
-            bodyCreated = true;
-        }
-       moveSnake();
+         
         if (isTouching(Apple.class)) {
             removeTouching(Apple.class);
             ((MyWorld)getWorld()).spawnApple();
-    }
+        }
     
     }
        
 
-        public void moveSnake()
-    {
-        if (Greenfoot.isKeyDown("up"))
+    public void moveSnake()
         {
-            setRotation(270);
-            move(2);
+        
         }
-        if (Greenfoot.isKeyDown("down"))
-        {
-            setRotation(90);
-            move(2);
+        
+    private void createBody() {
+        
         }
-        if (Greenfoot.isKeyDown("left"))
-        {
-            setRotation(180);
-            move(2);
-        }
-        if (Greenfoot.isKeyDown("right"))
-        {
-            setRotation(0);
-            move(2);
-        }
-    }
-        private void createBody() {
-        for (int i = 1; i <= 3; i++) {
-            SnakeBody segment = new SnakeBody();
-            body.add(segment);
-            getWorld().addObject(segment, getX() - (i * 20), getY());
-        }
-    }
+    
     
 }
 

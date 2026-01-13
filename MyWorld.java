@@ -2,7 +2,7 @@ import greenfoot.*;
 
 public class MyWorld extends World
 {
-    private Label scoreLabel;
+    
 
     public MyWorld()
     {    
@@ -25,10 +25,7 @@ public class MyWorld extends World
         addObject(apple, x, y);
     }
 
-    public void addScore(int amount)
-    {
-        
-    }
+    
     
      public void gameOver()
     {
