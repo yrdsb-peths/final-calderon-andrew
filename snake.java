@@ -72,6 +72,7 @@ public class snake extends Actor
             getWorld().addObject(segment, getX() - (i * 20), getY());
         }
     }
+    
 }
 
 
