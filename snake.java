@@ -13,9 +13,13 @@ public class snake extends Actor
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     
+
     // test 
     private String direction = "right";
     private int moveCounter = 0;
+    private ArrayList<SnakeBody> body = new ArrayList<>();
+    private ArrayList <int[]> positions = new ArrayList<>();
+    private boolean bodyCreated = false;
     
     public snake() {
         GreenfootImage img = new GreenfootImage(20, 20);
@@ -27,7 +31,12 @@ public class snake extends Actor
 
     public void act()
     {
-         
+        if(!bodyCreated){
+            createBody();
+            bodyCreated = true;
+        }
+        
+        //apple detection
         if (isTouching(Apple.class)) {
             removeTouching(Apple.class);
             ((MyWorld)getWorld()).spawnApple();
@@ -61,16 +70,36 @@ public class snake extends Actor
 
     public void moveSnake()
     {
+        // saves current head position before movement
+        positions.add(0, new int [] {getX(), getY()});
+        
+        //move head
         if (direction.equals("up")) setLocation(getX(), getY() - 20);
         if (direction.equals("down")) setLocation(getX(), getY() + 20);
         if (direction.equals("left")) setLocation(getX() - 20, getY());
         if (direction.equals("right")) setLocation(getX() + 20, getY());
             
+        //Move body segments to follow
+        for(int i = 0; i<body.size(); i++){
+            if(i<positions.size()){
+                int[] pos = positions.get(i);
+                body.get(i).setLocation(pos[0], pos [1]);
+            }
+        }
+        
+        //remove extra positions
+        while(positions.size() > body.size()){
+            positions.remove(positions.size() - 1);
+        }
         
     }
         
     private void createBody() {
-        
+        for (int i = 1; i <= 3; i++){ 
+            SnakeBody segment = new SnakeBody();
+            body.add(segment);
+            getWorld().addObject(segment, getX() - (i * 20), getY());
+        }
     }
     
     
