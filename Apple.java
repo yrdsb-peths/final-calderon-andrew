@@ -6,22 +6,34 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
+import greenfoot.*;
+
 public class Apple extends Actor
 {
-    /**
-     * Act - do whatever the Apple wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    
-    public Apple() {
+    private GreenfootSound crunchSound = new GreenfootSound("crunch.wav");
+
+    public Apple()
+    {
         GreenfootImage img = new GreenfootImage(30, 30);
         img.setColor(Color.RED);
         img.fillOval(0, 0, 30, 30);
         setImage(img);
     }
-    
+
     public void act()
     {
-        // Add your action code here.
+        checkEaten();
+    }
+
+    private void checkEaten()
+    {
+        if (isTouching(Snake.class))
+        {
+            crunchSound.play();
+
+            int x = Greenfoot.getRandomNumber(getWorld().getWidth());
+            int y = Greenfoot.getRandomNumber(getWorld().getHeight());
+            setLocation(x, y);
+        }
     }
 }

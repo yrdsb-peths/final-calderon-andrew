@@ -6,7 +6,8 @@ import java.util.ArrayList;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class snake extends Actor
+public class Snake extends Actor
+
 {
     /**
      * Act - do whatever the snake wants to do. This method is called whenever
@@ -19,7 +20,7 @@ public class snake extends Actor
     private int dy = 0;
     private boolean bodyCreated = false;
     
-    public snake() {
+    public Snake() {
         GreenfootImage img = new GreenfootImage(20, 20);
         img.setColor(Color.GREEN);
         img.fillOval(0, 0, 20, 20);

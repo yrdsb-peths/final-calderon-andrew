@@ -9,7 +9,7 @@ public class MyWorld extends World
         super(600, 400, 1);
         
 
-        snake snake = new snake();
+        Snake snake = new Snake();
         addObject(snake, getWidth()/2, getHeight()/2);
 
         
