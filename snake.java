@@ -53,7 +53,7 @@ public class snake extends Actor
         }
         
         moveCounter++;
-        if (moveCounter >= 10) {
+        if (moveCounter >= 8) {
             moveSnake();
             moveCounter = 0;
         }
