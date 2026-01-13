@@ -40,6 +40,8 @@ public class snake extends Actor
         if (isTouching(Apple.class)) {
             removeTouching(Apple.class);
             ((MyWorld)getWorld()).spawnApple();
+            growBody();
+            ((MyWorld)getWorld()).spawnApple();
         }
         
         //Movement
@@ -102,7 +104,17 @@ public class snake extends Actor
         }
     }
     
+    private void growBody(){
+        SnakeBody segment = new SnakeBody();
+        body.add(segment);
     
+    
+    // Place at the last body segment's position
+    if(!body.isEmpty()&& body.size() > 1){
+        SnakeBody tail = body.get(body.size() - 2);
+        getWorld().addObject(segment, tail.getX(), tail.getY());
+    }
+    }
 }
 
 
