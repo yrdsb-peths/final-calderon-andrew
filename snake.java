@@ -14,7 +14,8 @@ public class snake extends Actor
      */
     
     // test 
-    
+    private String direction = "right";
+    private int moveCounter = 0;
     
     public snake() {
         GreenfootImage img = new GreenfootImage(20, 20);
@@ -31,18 +32,46 @@ public class snake extends Actor
             removeTouching(Apple.class);
             ((MyWorld)getWorld()).spawnApple();
         }
-    
-    }
-       
-
-    public void moveSnake()
-        {
+        
+        //Movement
+        
+        if (Greenfoot.isKeyDown("up")) {
+            direction = "up";
         
         }
+        
+        if(Greenfoot.isKeyDown("down")){
+            direction = "down";
+        }
+        
+        if(Greenfoot.isKeyDown("left")){
+            direction = "left";
+        }
+            
+        if(Greenfoot.isKeyDown("right")){
+            direction = "right";
+        }
+        
+        moveCounter++;
+        if (moveCounter >= 10) {
+            moveSnake();
+            moveCounter = 0;
+        }
+    }
+
+    public void moveSnake()
+    {
+        if (direction.equals("up")) setLocation(getX(), getY() - 20);
+        if (direction.equals("down")) setLocation(getX(), getY() + 20);
+        if (direction.equals("left")) setLocation(getX() - 20, getY());
+        if (direction.equals("right")) setLocation(getX() + 20, getY());
+            
+        
+    }
         
     private void createBody() {
         
-        }
+    }
     
     
 }
