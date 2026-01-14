@@ -40,9 +40,9 @@ public class snake extends Actor
         //apple detection
         if (isTouching(Apple.class)) {
             removeTouching(Apple.class);
-            ((MyWorld)getWorld()).spawnApple();
             growBody();
-            
+            score++;
+            ((MyWorld)getWorld()).spawnApple();
         }
         
         //Movement
@@ -149,6 +149,10 @@ public class snake extends Actor
                 gameOver();
             }
         }
+    }
+    
+    public int getScore(){
+        return score;
     }
 }
 

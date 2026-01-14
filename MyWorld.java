@@ -16,7 +16,16 @@ public class MyWorld extends World
 
         spawnApple();
     }
+    
+    public void act(){
+        
+        showText("Score: " + getScore(), 50, 20); //shows score
+    }
 
+    public int getScore(){
+        snake s = (snake) getObjects(snake.class).get(0);
+        return s.getScore();
+    }
     public void spawnApple()
     {
         Apple apple = new Apple();
