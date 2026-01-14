@@ -108,7 +108,7 @@ public class snake extends Actor
             SnakeBody segment = new SnakeBody();
             body.add(segment);
             getWorld().addObject(segment, getX() - (i * 20), getY());
-            score++;
+            
         }
     }
     
@@ -139,7 +139,7 @@ public class snake extends Actor
     
         private void gameOver(){
         {   
-            Greenfoot.stop();
+            ((MyWorld)getWorld()).showGameOver(score);
         }
     }
     

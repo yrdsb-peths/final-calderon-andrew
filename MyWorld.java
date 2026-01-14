@@ -41,5 +41,9 @@ public class MyWorld extends World
         showText("GAME OVER", getWidth()/2, getHeight()/2);
         Greenfoot.stop();
     }
+    
+    public void showGameOver(int finalScore){
+        Greenfoot.setWorld(new GameOverScreen(finalScore));
+    }
 }
 
