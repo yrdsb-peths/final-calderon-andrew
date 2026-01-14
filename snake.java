@@ -69,8 +69,12 @@ public class snake extends Actor
             moveSnake();
             moveCounter = 0;
             checkWallCollision();
+            checkBodyCollision();
             moveCounter = 0;
+            
         }
+        
+    
     }
 
     public void moveSnake()
@@ -136,6 +140,14 @@ public class snake extends Actor
         private void gameOver(){
         {   
             Greenfoot.stop();
+        }
+    }
+    
+    private void checkBodyCollision(){
+        for(SnakeBody segment : body){
+            if(getX() == segment.getX() && getY() == segment.getY()) {
+                gameOver();
+            }
         }
     }
 }
