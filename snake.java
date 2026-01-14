@@ -53,7 +53,7 @@ public class snake extends Actor
         
         }
         
-        if(Greenfoot.isKeyDown("down") && !direction.equals("right")){
+        if(Greenfoot.isKeyDown("down") && !direction.equals("up")){
             direction = "down";
         }
         
