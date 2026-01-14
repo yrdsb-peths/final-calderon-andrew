@@ -47,20 +47,20 @@ public class snake extends Actor
         
         //Movement
         
-        if (Greenfoot.isKeyDown("up")) {
+        if (Greenfoot.isKeyDown("up") && !direction.equals("down")) {
             direction = "up";
         
         }
         
-        if(Greenfoot.isKeyDown("down")){
+        if(Greenfoot.isKeyDown("down") && !direction.equals("right")){
             direction = "down";
         }
         
-        if(Greenfoot.isKeyDown("left")){
+        if(Greenfoot.isKeyDown("left") && !direction.equals("right")){
             direction = "left";
         }
             
-        if(Greenfoot.isKeyDown("right")){
+        if(Greenfoot.isKeyDown("right") && !direction.equals("left")){
             direction = "right";
         }
         
