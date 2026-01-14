@@ -3,7 +3,7 @@ import java.util.ArrayList;
 /**
  * Write a description of class snake here.
  * 
- * @author (your name) 
+ * @author  
  * @version (a version number or a date)
  */
 public class Snake extends Actor
@@ -14,10 +14,13 @@ public class Snake extends Actor
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     
+
     // test 
+    private String direction = "right";
+    private int moveCounter = 0;
+    private int score = 0;  
     private ArrayList<SnakeBody> body = new ArrayList<>();
-    private int dx = 5;
-    private int dy = 0;
+    private ArrayList <int[]> positions = new ArrayList<>();
     private boolean bodyCreated = false;
     
     public Snake() {
@@ -30,50 +33,133 @@ public class Snake extends Actor
 
     public void act()
     {
-         if (!bodyCreated) {
+        if(!bodyCreated){
             createBody();
             bodyCreated = true;
         }
-       moveSnake();
+        
+        //apple detection
         if (isTouching(Apple.class)) {
+            new GreenfootSound("chomp.mp3").play();
             removeTouching(Apple.class);
+            growBody();
+            score++;
             ((MyWorld)getWorld()).spawnApple();
-    }
+        }
+        
+        //Movement
+        
+        if (Greenfoot.isKeyDown("up") && !direction.equals("down")) {
+            direction = "up";
+        
+        }
+        
+        if(Greenfoot.isKeyDown("down") && !direction.equals("right")){
+            direction = "down";
+        }
+        
+        if(Greenfoot.isKeyDown("left") && !direction.equals("right")){
+            direction = "left";
+        }
+            
+        if(Greenfoot.isKeyDown("right") && !direction.equals("left")){
+            direction = "right";
+        }
+        
+        moveCounter++;
+        if (moveCounter >= 8) {
+            moveSnake();
+            moveCounter = 0;
+            checkWallCollision();
+            checkBodyCollision();
+            moveCounter = 0;
+            
+        }
+        
     
     }
-       
 
-        public void moveSnake()
+    public void moveSnake()
     {
-        if (Greenfoot.isKeyDown("up"))
-        {
-            setRotation(270);
-            move(2);
+        // saves current head position before movement
+        positions.add(0, new int [] {getX(), getY()});
+        
+        //move head
+        if (direction.equals("up")) setLocation(getX(), getY() - 20);
+        if (direction.equals("down")) setLocation(getX(), getY() + 20);
+        if (direction.equals("left")) setLocation(getX() - 20, getY());
+        if (direction.equals("right")) setLocation(getX() + 20, getY());
+            
+        //Move body segments to follow
+        for(int i = 0; i<body.size(); i++){
+            if(i<positions.size()){
+                int[] pos = positions.get(i);
+                body.get(i).setLocation(pos[0], pos [1]);
+            }
         }
-        if (Greenfoot.isKeyDown("down"))
-        {
-            setRotation(90);
-            move(2);
+        
+        //remove extra positions
+        while(positions.size() > body.size()){
+            positions.remove(positions.size() - 1);
         }
-        if (Greenfoot.isKeyDown("left"))
-        {
-            setRotation(180);
-            move(2);
-        }
-        if (Greenfoot.isKeyDown("right"))
-        {
-            setRotation(0);
-            move(2);
-        }
+        
     }
-        private void createBody() {
-        for (int i = 1; i <= 3; i++) {
+        
+    private void createBody() {
+        for (int i = 1; i <= 3; i++){ 
             SnakeBody segment = new SnakeBody();
             body.add(segment);
             getWorld().addObject(segment, getX() - (i * 20), getY());
+            
         }
     }
+    
+        private void growBody(){
+            for(int i = 0; i< 3 ; i++){
+            SnakeBody segment = new SnakeBody();
+        
+    
+    
+                // Place at the last body segment's position
+                if(body.size() > 1){
+                    SnakeBody tail = body.get(body.size() - 1);
+                    getWorld().addObject(segment, tail.getX(), tail.getY());
+                }
+    
+                else{
+                    getWorld().addObject(segment,getX(), getY());
+                }
+            body.add(segment);
+            }
+    }
+    
+        private void checkWallCollision(){
+            if(getX() <= 10 || getX() >= getWorld().getWidth() - 10 
+            ||getY() <= 10 || getY() >= getWorld().getHeight() - 10) 
+            gameOver();
+    }
+    
+        private void gameOver(){
+        {   
+            MyWorld world = (MyWorld)getWorld();
+            world.gameOver();
+            ((MyWorld)getWorld()).showGameOver(score);
+        }
+    }
+    
+    private void checkBodyCollision(){
+        for(SnakeBody segment : body){
+            if(getX() == segment.getX() && getY() == segment.getY()) {
+                gameOver();
+            }
+        }
+    }
+    
+    public int getScore(){
+        return score;
+    }
 }
+
 
 
 
