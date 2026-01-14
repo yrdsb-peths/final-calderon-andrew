@@ -3,7 +3,7 @@ import java.util.ArrayList;
 /**
  * Write a description of class snake here.
  * 
- * @author (your name) 
+ * @author  
  * @version (a version number or a date)
  */
 public class snake extends Actor
@@ -68,6 +68,8 @@ public class snake extends Actor
         if (moveCounter >= 8) {
             moveSnake();
             moveCounter = 0;
+            checkWallCollision();
+            moveCounter = 0;
         }
     }
 
@@ -106,22 +108,34 @@ public class snake extends Actor
         }
     }
     
-    private void growBody(){
-        for(int i = 0; i< 2 ; i++){
-        SnakeBody segment = new SnakeBody();
+        private void growBody(){
+            for(int i = 0; i< 3 ; i++){
+            SnakeBody segment = new SnakeBody();
         
     
     
-    // Place at the last body segment's position
-        if(body.size() > 1){
-            SnakeBody tail = body.get(body.size() - 1);
-            getWorld().addObject(segment, tail.getX(), tail.getY());
-        }
+                // Place at the last body segment's position
+                if(body.size() > 1){
+                    SnakeBody tail = body.get(body.size() - 1);
+                    getWorld().addObject(segment, tail.getX(), tail.getY());
+                }
     
-        else{
-            getWorld().addObject(segment,getX(), getY());
-        }
+                else{
+                    getWorld().addObject(segment,getX(), getY());
+                }
             body.add(segment);
+            }
+    }
+    
+        private void checkWallCollision(){
+            if(getX() <= 10 || getX() >= getWorld().getWidth() - 10 
+            ||getY() <= 10 || getY() >= getWorld().getHeight() - 10) 
+            gameOver();
+    }
+    
+        private void gameOver(){
+        {   
+            Greenfoot.stop();
         }
     }
 }
