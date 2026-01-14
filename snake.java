@@ -39,6 +39,7 @@ public class snake extends Actor
         
         //apple detection
         if (isTouching(Apple.class)) {
+            new GreenfootSound("chomp.mp3").play();
             removeTouching(Apple.class);
             growBody();
             score++;
@@ -139,6 +140,8 @@ public class snake extends Actor
     
         private void gameOver(){
         {   
+            MyWorld world = (MyWorld)getWorld();
+            world.gameOver();
             ((MyWorld)getWorld()).showGameOver(score);
         }
     }

@@ -2,12 +2,17 @@ import greenfoot.*;
 
 public class MyWorld extends World
 {
-    
+    private GreenfootSound backgroundMusic;
 
     public MyWorld()
     {    
         super(600, 400, 1);
         
+        
+        setBackground("background.jpg");
+        
+        backgroundMusic = new GreenfootSound("redcoats.mp3");
+        backgroundMusic.playLoop();
 
         snake snake = new snake();
         addObject(snake, getWidth()/2, getHeight()/2);
@@ -39,7 +44,8 @@ public class MyWorld extends World
      public void gameOver()
     {
         showText("GAME OVER", getWidth()/2, getHeight()/2);
-        Greenfoot.stop();
+        backgroundMusic.stop();
+        
     }
     
     public void showGameOver(int finalScore){

@@ -15,14 +15,17 @@ public class TitleScreen extends World
      */
     private Label titleLabel;
     private Label instructionLabel;
+    private GreenfootSound titleMusic;
     
     public TitleScreen()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(600, 400, 1); 
-    
-    
-        titleLabel = new Label("VIDEO GAME OF SERPENTS", 48);
+        setBackground("AppleFarm.jpg");
+        
+        titleMusic = new GreenfootSound("title screen.mp3");
+        titleMusic.playLoop();
+        titleLabel = new Label("SERPENT", 48);
         addObject(titleLabel, 300, 150);
         
         instructionLabel = new Label ("Press SPACE to Start", 24);
@@ -30,11 +33,15 @@ public class TitleScreen extends World
          
     }
     
+    
     public void act()
     {
-        if(Greenfoot.isKeyDown("space"))
+        String key = Greenfoot.getKey();
+        
+        if(key != null && key.equals("space"))
         {
             Greenfoot.setWorld(new MyWorld());
+            titleMusic.stop();
         }
         
         if(Greenfoot.isKeyDown("6") || Greenfoot.isKeyDown("7"))

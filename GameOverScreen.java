@@ -13,13 +13,18 @@ public class GameOverScreen extends World
      * Constructor for objects of class GameOverScreen.
      * 
      */
+    private GreenfootSound titleMusic;
     public GameOverScreen(int finalScore)
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(600, 400, 1); 
+        
         showText("GAME OVER", 300, 150);
         showText("Final Score: " + finalScore, 300, 200);
-        showText("Press SPACE to Restart", 300, 250);
+        showText("Press CONTROL to Restart", 300, 250);
+        setBackground("spongebobcry.gif");
+        titleMusic = new GreenfootSound("rap.mp3");
+        titleMusic.playLoop();
     }
     
     public void act()
@@ -28,9 +33,10 @@ public class GameOverScreen extends World
     }
     
     private void checkRestart(){
-        if(Greenfoot.isKeyDown("space"))
+        if(Greenfoot.isKeyDown("control"))
         {
             Greenfoot.setWorld(new TitleScreen());
+            titleMusic.stop();
         }
     }
 }
